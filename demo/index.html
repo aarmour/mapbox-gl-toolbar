@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <meta charset=utf-8 />
+  <title>Mapbox GL Toolbar | Mapbox</title>
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+    html, body { height: 100%; }
+    body { margin: 0; }
+    #map { height: 100%; }
+  </style>
+</head>
+<body>
+  <div id='map'></div>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+  <script src='/mapbox-gl-toolbar.js'></script>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWFybW91ciIsImEiOiJjaWlucjJxNDkwMWVwdmptNWw4Z20xNXpwIn0.SwlGS26RAgqeTK1kD-Xclw';
+
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v9'
+    });
+
+    var buttons = [
+      { iconClass: 'material-icons', iconLigature: 'add', tooltip: 'Zoom In' },
+      { iconClass: 'material-icons', iconLigature: 'remove', tooltip: 'Zoom Out' },
+      { iconClass: 'material-icons', iconLigature: 'my_location', tooltip: 'Find Me' },
+      { iconClass: 'material-icons', iconLigature: 'language', tooltip: 'Satellite' },
+      { iconClass: 'material-icons', iconLigature: 'drive_eta', tooltip: 'Traffic' },
+      { iconClass: 'material-icons', iconLigature: 'call_made', tooltip: 'Share' },
+      { iconClass: 'material-icons', iconLigature: 'print', tooltip: 'Print' }
+    ];
+
+    var toolbar = new MapboxToolbar({ buttons });
+
+    map.addControl(toolbar);
+  </script>
+</body>
+</html>
