@@ -29,6 +29,10 @@
     opacity: 1;
   }
 
+  .mapboxgl-ctrl-toolbar-hidden {
+    display: none !important;
+  }
+
 }
 
 @media (min-width: 769px) {

@@ -657,6 +657,7 @@ class ToolbarControl extends Evented {
   _createButton(buttonProps) {
     const button = DOM.create('button', null, this._container);
     this._createButtonIcon(button, buttonProps.iconClass, buttonProps.iconLigature);
+    if (buttonProps.mobile === false) button.classList.add(`${ className }-toolbar-hidden`);
   }
 
   _createButtonIcon(button, iconClassName, ligature) {
