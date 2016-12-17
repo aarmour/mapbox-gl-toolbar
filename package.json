@@ -20,7 +20,9 @@
     "lint": "eslint --no-eslintrc -c .eslintrc index.js src",
     "tape": "tape -r babel-register src/*.test.js",
     "prebuild": "mkdir -p dist",
-    "build": "npm run prebuild && NODE_ENV=production browserify index.js --standalone MapboxToolbar > dist/mapbox-gl-toolbar.js",
+    "bundle": "NODE_ENV=production browserify index.js --standalone MapboxToolbar > dist/mapbox-gl-toolbar.js",
+    "css": "cp src/style.css dist/mapbox-gl-toolbar.css",
+    "build": "npm run prebuild && npm run css && npm run bundle",
     "start": "node server.js"
   },
   "devDependencies": {

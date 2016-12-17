@@ -4,6 +4,7 @@ const Evented = require('mapbox-gl/js/util/evented');
 const DOM = require('mapbox-gl/js/util/dom');
 
 const className = 'mapboxgl-ctrl';
+const expandedClassName = `${className}-toolbar-expanded`;
 
 class ToolbarControl extends Evented {
 
@@ -19,6 +20,10 @@ class ToolbarControl extends Evented {
     this.options.buttons.forEach(buttonProps => {
       this._createButton(buttonProps);
     });
+
+    this._toggleButton = DOM.create('button', `${className}-toolbar-toggle`, this._container);
+    this._toggleButton.innerHTML = '&hellip;';
+    this._toggleButton.addEventListener('click', this._toggle.bind(this));
 
     return this._container;
   }
@@ -36,6 +41,10 @@ class ToolbarControl extends Evented {
   _createButtonIcon(button, iconClassName, ligature) {
     const icon = DOM.create('span', `${className}-toolbar-icon ${iconClassName}`, button);
     icon.textContent = ligature;
+  }
+
+  _toggle() {
+    this._container.classList[this._container.classList.contains(expandedClassName) ? 'remove' : 'add'](expandedClassName);
   }
 
 }

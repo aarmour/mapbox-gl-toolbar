@@ -1,0 +1,40 @@
+@media (max-width: 768px) {
+
+  .mapboxgl-ctrl-toolbar {
+    display: flex;
+  }
+
+  .mapboxgl-ctrl-toolbar > button {
+    border-right: 1px solid #ddd;
+    border-bottom: 0;
+    transition: all 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+  }
+
+  .mapboxgl-ctrl-toolbar:not(.mapboxgl-ctrl-toolbar-expanded) > button:not(.mapboxgl-ctrl-toolbar-toggle) {
+    width: 0;
+    opacity: 0;
+    border: 0;
+  }
+
+  .mapboxgl-ctrl-toolbar > button:last-child {
+    border-right: 0;
+  }
+
+  .mapboxgl-ctrl-toolbar-toggle {
+    z-index: 1;
+  }
+
+  .mapboxgl-ctrl-toolbar-expanded > button {
+    width: 30px;
+    opacity: 1;
+  }
+
+}
+
+@media (min-width: 769px) {
+
+  .mapboxgl-ctrl-toolbar-toggle {
+    display: none !important;
+  }
+
+}
