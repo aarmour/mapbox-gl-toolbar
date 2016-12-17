@@ -35,7 +35,7 @@
       { iconClass: 'material-icons', iconLigature: 'print', tooltip: 'Print', mobile: false }
     ];
 
-    var toolbar = new MapboxToolbar({ buttons });
+    var toolbar = new MapboxToolbar({ buttons, collapseOnInteraction: true });
 
     map.addControl(toolbar);
   </script>

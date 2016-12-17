@@ -624,12 +624,14 @@ UnitBezier.prototype.solve = function(x, epsilon) {
 const Evented = require('mapbox-gl/js/util/evented');
 const DOM = require('mapbox-gl/js/util/dom');
 
+const DEFAULT_OPTIONS = { buttons: [], collapseOnInteraction: false };
+
 const className = 'mapboxgl-ctrl';
 const expandedClassName = `${ className }-toolbar-expanded`;
 
 class ToolbarControl extends Evented {
 
-  constructor(options = { buttons: [] }) {
+  constructor(options = DEFAULT_OPTIONS) {
     super();
     this.options = options;
   }
@@ -637,6 +639,7 @@ class ToolbarControl extends Evented {
   onAdd(map) {
     this._map = map;
     this._container = DOM.create('div', `${ className } ${ className }-group ${ className }-toolbar`, map.getContainer());
+    this._eventListeners = [];
 
     this.options.buttons.forEach(buttonProps => {
       this._createButton(buttonProps);
@@ -646,12 +649,24 @@ class ToolbarControl extends Evented {
     this._toggleButton.innerHTML = '&hellip;';
     this._toggleButton.addEventListener('click', this._toggle.bind(this));
 
+    if (this.options.collapseOnInteraction) {
+      this._addEventListener(map, 'touchend', this._toggle.bind(this, true));
+      this._addEventListener(map, 'zoomend', this._toggle.bind(this, true));
+      this._addEventListener(map, 'dragend', this._toggle.bind(this, true));
+    }
+
     return this._container;
   }
 
   onRemove() {
     this._container.parentNode.removeChild(this._container);
     this._map = undefined;
+    this._removeEventListeners();
+  }
+
+  _addEventListener(obj, type, fn) {
+    this._eventListeners.push({ obj, type, fn });
+    obj.on(type, fn);
   }
 
   _createButton(buttonProps) {
@@ -665,8 +680,16 @@ class ToolbarControl extends Evented {
     icon.textContent = ligature;
   }
 
-  _toggle() {
-    this._container.classList[this._container.classList.contains(expandedClassName) ? 'remove' : 'add'](expandedClassName);
+  _removeEventListeners() {
+    this._eventListeners.forEach(listener => listener.obj.off(listener.type, listener.fn));
+  }
+
+  _toggle(off) {
+    if (off === true || this._container.classList.contains(expandedClassName)) {
+      this._container.classList.remove(expandedClassName);
+    } else {
+      this._container.classList.add(expandedClassName);
+    }
   }
 
 }
