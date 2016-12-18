@@ -27,18 +27,21 @@
     });
 
     var buttons = [
-      { iconClass: 'material-icons', iconLigature: 'add', tooltip: 'Zoom In' },
-      { iconClass: 'material-icons', iconLigature: 'remove', tooltip: 'Zoom Out' },
-      { iconClass: 'material-icons', iconLigature: 'my_location', tooltip: 'Find Me' },
-      { iconClass: 'material-icons', iconLigature: 'language', tooltip: 'Satellite' },
-      { iconClass: 'material-icons', iconLigature: 'drive_eta', tooltip: 'Traffic' },
-      { iconClass: 'material-icons', iconLigature: 'call_made', tooltip: 'Share' },
-      { iconClass: 'material-icons', iconLigature: 'print', tooltip: 'Print', mobile: false }
+      { id: 'zoom-in', iconClass: 'material-icons', iconLigature: 'add', tooltip: 'Zoom In', mobile: false },
+      { id: 'zoom-out', iconClass: 'material-icons', iconLigature: 'remove', tooltip: 'Zoom Out', mobile: false },
+      { id: 'find-me', iconClass: 'material-icons', iconLigature: 'my_location', tooltip: 'Find Me' },
+      { id: 'layer', iconClass: 'material-icons', iconLigature: 'language', tooltip: 'Satellite' },
+      { id: 'traffic', iconClass: 'material-icons', iconLigature: 'drive_eta', tooltip: 'Traffic' },
+      { id: 'share', iconClass: 'material-icons', iconLigature: 'call_made', tooltip: 'Share' },
+      { id: 'print', iconClass: 'material-icons', iconLigature: 'print', tooltip: 'Print', mobile: false }
     ];
 
     var toolbar = new MapboxToolbar({ buttons, collapseOnInteraction: true });
 
     map.addControl(toolbar);
+
+    toolbar.getButton('zoom-in').addEventListener('click', function() { map.zoomIn(); });
+    toolbar.getButton('zoom-out').addEventListener('click', function() { map.zoomOut(); });
   </script>
 </body>
 </html>

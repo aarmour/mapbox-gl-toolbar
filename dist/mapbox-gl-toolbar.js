@@ -634,7 +634,12 @@ class ToolbarControl extends Evented {
   constructor(options = DEFAULT_OPTIONS) {
     super();
     this.options = options;
+    this._buttons = {};
   }
+
+  /**
+   * IControl
+   */
 
   onAdd(map) {
     this._map = map;
@@ -664,13 +669,25 @@ class ToolbarControl extends Evented {
     this._removeEventListeners();
   }
 
+  /**
+   * Public methods
+   */
+
+  getButton(id) {
+    return this._buttons[id];
+  }
+
+  /**
+   * Private methods
+   */
+
   _addEventListener(obj, type, fn) {
     this._eventListeners.push({ obj, type, fn });
     obj.on(type, fn);
   }
 
   _createButton(buttonProps) {
-    const button = DOM.create('button', null, this._container);
+    const button = this._buttons[buttonProps.id] = DOM.create('button', null, this._container);
     this._createButtonIcon(button, buttonProps.iconClass, buttonProps.iconLigature);
     if (buttonProps.mobile === false) button.classList.add(`${ className }-toolbar-hidden`);
   }
