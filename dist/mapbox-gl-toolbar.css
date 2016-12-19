@@ -29,16 +29,16 @@
     opacity: 1;
   }
 
-  .mapboxgl-ctrl-toolbar-hidden {
-    display: none !important;
+  button.mapboxgl-ctrl-toolbar-hidden {
+    display: none;
   }
 
 }
 
 @media (min-width: 769px) {
 
-  .mapboxgl-ctrl-toolbar-toggle {
-    display: none !important;
+  button.mapboxgl-ctrl-toolbar-toggle {
+    display: none;
   }
 
 }
